@@ -11,7 +11,7 @@ var canvas;
 var ctx;
 var generation = 0;
 var speed = 1000;	// adjustable (ms)
-var scenario = 0;	// adjustable - todo: implement some scenarios from wikipedia page
+var scenario = 1;	// adjustable - todo: implement some scenarios from wikipedia page
 
 function init() {
 	console.log("hello");
@@ -33,6 +33,11 @@ function init() {
 			}
 		}
 	}
+
+	for (var i = -1; i < 2; i++) {
+		console.log(i);
+	}
+	
 	render();
 	step();
 	
@@ -43,27 +48,30 @@ var backup;
 function step() {
 	backup = board.slice();	// copy by value lol
 	// iterate through the game board. 0=dead, 1=alive
-	for (var row = 10; row < boardSize; row++) {
-		for (var col = 10; col < boardSize; col++) {
+	for (var col = 10; col < boardSize; col++) {
+		for (var row = 10; row < boardSize; row++) {
 			// implement rules of sim
 			var liveNeighbors = 0;	// count live # of neighbors
-			var tileState = board[row][col];
+			var tileState = board[col][row];
 			
-			liveNeighbors += board[row][col+1];
+			/*liveNeighbors += board[row][col+1];
 			liveNeighbors += board[row][col-1];
 			liveNeighbors += board[row+1][col];
 			liveNeighbors += board[row-1][col];
 			liveNeighbors += board[row+1][col+1];
 			liveNeighbors += board[row-1][col-1];
 			liveNeighbors += board[row-1][col+1];
-			liveNeighbors += board[row+1][col-1];
+			liveNeighbors += board[row+1][col-1];*/
+			
+			
+			
 //			console.log(liveNeighbors);
 			
 			
 		}
 	}
 }
-// [row][col]
+// [col][row]
 function render() {
 	if (canvas.getContext) {
 		for (var row = 0; row < boardSize; row++) {
