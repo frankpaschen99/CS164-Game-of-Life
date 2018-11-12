@@ -11,7 +11,7 @@ var canvas;
 var ctx;
 var generation = 0;
 var speed = 1000;	// adjustable (ms)
-var scenario = 1;	// adjustable - todo: implement some scenarios from wikipedia page
+var scenario = 0;	// adjustable - todo: implement some scenarios from wikipedia page
 
 function init() {
 	console.log("hello");
@@ -34,9 +34,7 @@ function init() {
 		}
 	}
 
-	for (var i = -1; i < 2; i++) {
-		console.log(i);
-	}
+	
 	
 	render();
 	step();
@@ -53,21 +51,18 @@ function step() {
 			// implement rules of sim
 			var liveNeighbors = 0;	// count live # of neighbors
 			var tileState = board[col][row];
-			
-			/*liveNeighbors += board[row][col+1];
-			liveNeighbors += board[row][col-1];
-			liveNeighbors += board[row+1][col];
-			liveNeighbors += board[row-1][col];
-			liveNeighbors += board[row+1][col+1];
-			liveNeighbors += board[row-1][col-1];
-			liveNeighbors += board[row-1][col+1];
-			liveNeighbors += board[row+1][col-1];*/
-			
-			
-			
-//			console.log(liveNeighbors);
-			
-			
+
+			// okay this is hacky but it works
+			for (var i = -1; i < 2; i++) {
+				for (var j = 1; j > -2; j--) {
+					if (board[col+i] === undefined || board[col+i][row-j] === undefined) {
+						continue;
+					}
+					liveNeighbors += (board[col+i][row-j]) ;
+				}
+			}
+			if (board[col][row] == 1) liveNeighbors -= 1;
+			console.log("board[" + col + "][" + row + "]:	" + liveNeighbors);		
 		}
 	}
 }
