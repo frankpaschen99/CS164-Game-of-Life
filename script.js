@@ -6,8 +6,22 @@ var ctx;
 var generation = 0;
 var speed = 150;	// adjustable (ms)
 var scenario = 1;	// adjustable - todo: implement some scenarios from wikipedia page
+var interval;
 
 function init() {
+	boardSize = document.getElementById("size").value;
+	speed = document.getElementById("speed").value;
+	scenario = document.getElementById("scenario").value;
+	/* Input checking */
+	if (boardSize > 200 || boardSize < 1) {
+		alert("Boardsize must be between 1 and 200!");
+		return;
+	}
+	if (speed < 1) {
+		alert("Interval Duration must be > 1ms!");
+		return;
+	}
+	
 	// Initialize the game board to the size specified above
 	board = new Array(boardSize);
 	for (var i = 0; i < boardSize; i++) {
@@ -35,12 +49,13 @@ function init() {
 		for (var row = 25; row < 35; row++) {
 			board[row][25] = 1;
 		}
+	} else if (scenario == 3) {
+		
 	}
-	
 	// call render first so we can see the first frame
 	render();
 	// call step on an interval specified by the user
-	setInterval(step, speed);
+	interval = setInterval(step, speed);
 }
 
 function step() {
@@ -88,6 +103,7 @@ function step() {
 	render();
 	// increment generation to display to user
 	generation++;
+	document.getElementById("gen").innerHTML = "Generation: " + generation;
 }
 
 function render() {

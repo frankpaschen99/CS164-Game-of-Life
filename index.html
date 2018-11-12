@@ -4,11 +4,33 @@
 
 	
 	<body>
+		<h1>Conway's Game of Life</h1>
+		<p>Configure settings to your liking then press "Start"</p>
+		<div id="gen"></div>
 		<canvas id="canvas" width="600" height="600"></canvas>
+		<br />
 		<!-- todo: make some nice sliders and boxes for customizing sim -->
+		
+		<p>Interval Duration (milliseconds):</p><input id="speed" type="text" name="speed" value="100">
+		<p>Board Size:</p><input id="size" type="text" name="size" value="50"><br /><br />
+		
+		<p>Scenario Preset:</p>
+		<select id="scenario">
+            <option value="1">Random</option>
+            <option value="2">10 Cell Line</option>
+            <option value="3">Csharp</option>
+            <option value="4">Java</option>
+            <option value="5">Node.js</option>
+        </select>
+		<br />
+		<br />
+		<br />
+		
+		<input id="startButton" type="button" value="Start Simulation" onclick="init();" /
+		<br />
+		<br />
+		<br />
+		<center>By <a href="https://github.com/frankpaschen99">Frank Paschen</a></center>
 	</body>
-	<script>
-	init();
-	</script>
 </head>
 </html>
