@@ -1,43 +1,49 @@
 <html>
+
+<body>
+	<h1>Conway's Game of Life</h1>
+	<p>Configure settings to your liking then press "Start"</p>
+	<div id="gen"></div>
+	<canvas id="canvas" width="600" height="600"></canvas>
+	<br />
+	<!-- todo: make some nice sliders and boxes for customizing sim -->
+	
+	<!--<p>Interval Duration (milliseconds):</p><input id="speed" type="text" name="speed" value="100">-->
+	<div class="slidecontainer">
+		<p>Adjust speed of simulation:</p>
+		<input id="slider" type="range" min="1" max="600" value="100" onchange="updateSpeed()">
+	</div>
+	<p>Board Size:</p><input id="size" type="text" name="size" value="50"><br /><br />
+	
+	<p>Scenario Preset:</p>
+	<select id="scenario">
+		<option value="1">Random</option>
+		<option value="2">10 Cell Line</option>
+	</select>
+	<br />
+	<br />
+	<br />
+	
+	<input id="startButton" type="button" value="Start Simulation" onclick="init();" /
+	<br />
+	<br />
+	<br />
+	
+	<h3>Todo List</h3>
+	<ul>
+	<li>Fix interval input box - DONE</li>
+	<li>Add more scenarios</li>
+	<li>Prettify UI maybe</li>
+	<li>Custom colors?</li>
+	<li>User Manual</li>
+	<li>MAYBE support seeding</li>
+	</ul>
+	
+	<center>By <a href="https://github.com/frankpaschen99">Frank Paschen</a></center>
+</body>
 <head>
 	<script src="script.js"></script>
-
-	
-	<body>
-		<h1>Conway's Game of Life</h1>
-		<p>Configure settings to your liking then press "Start"</p>
-		<div id="gen"></div>
-		<canvas id="canvas" width="600" height="600"></canvas>
-		<br />
-		<!-- todo: make some nice sliders and boxes for customizing sim -->
-		
-		<p>Interval Duration (milliseconds):</p><input id="speed" type="text" name="speed" value="100">
-		<p>Board Size:</p><input id="size" type="text" name="size" value="50"><br /><br />
-		
-		<p>Scenario Preset:</p>
-		<select id="scenario">
-            <option value="1">Random</option>
-            <option value="2">10 Cell Line</option>
-        </select>
-		<br />
-		<br />
-		<br />
-		
-		<input id="startButton" type="button" value="Start Simulation" onclick="init();" /
-		<br />
-		<br />
-		<br />
-		
-		<h3>Todo List</h3>
-		<ul>
-		<li>Fix interval input box</li>
-		<li>Add more scenarios</li>
-		<li>Prettify UI maybe</li>
-		<li>Custom colors?</li>
-		<li>User Manual</li>
-		</ul>
-		
-		<center>By <a href="https://github.com/frankpaschen99">Frank Paschen</a></center>
-	</body>
+	<link rel="stylesheet" href="style.css">
 </head>
+
 </html>

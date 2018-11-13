@@ -1,3 +1,9 @@
+	  /*||||*\
+	 //  By  \\
+	//  Frank \\
+   //  Paschen \\
+   \*||||||||||*/
+
 var board;
 var tileSize;
 var boardSize = 50; // adjustable
@@ -7,14 +13,16 @@ var generation = 0;
 var speed = 150;	// adjustable (ms)
 var scenario = 1;	// adjustable - todo: implement some scenarios from wikipedia page
 var interval;
+var slider = document.getElementById("slider");
 
 function init() {
 	boardSize = document.getElementById("size").value;
-	speed = document.getElementById("speed").value;
+	//speed = document.getElementById("speed").value;
 	scenario = document.getElementById("scenario").value;
+	
 	/* Input checking */
-	if (boardSize > 200 || boardSize < 1) {
-		alert("Boardsize must be between 1 and 200!");
+	if (boardSize > 100 || boardSize < 10) {
+		alert("Boardsize must be between 10 and 100!");
 		return;
 	}
 	if (speed < 1) {
@@ -46,8 +54,12 @@ function init() {
 			}
 		}
 	} else if (scenario == 2) { // 10 cell row
-		for (var row = 25; row < 35; row++) {
-			board[row][25] = 1;
+		if (boardSize < 30) {
+			alert("Board Size must be >= 30 to run scenario 2!");
+			return;
+		}
+		for (var row = Math.floor(boardSize/2); row < Math.floor(boardSize/2)+10; row++) {
+			board[row][Math.floor(boardSize/2)] = 1;
 		}
 	} else if (scenario == 3) {
 		
@@ -57,7 +69,10 @@ function init() {
 	// call step on an interval specified by the user
 	interval = setInterval(step, speed);
 }
-
+function updateSpeed() {
+	clearInterval(interval);
+	interval = setInterval(step, 601-slider.value);
+}
 function step() {
 	// backup board to modify before updating the display board
 	var backup = new Array(boardSize);
