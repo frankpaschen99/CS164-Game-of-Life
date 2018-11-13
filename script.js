@@ -17,7 +17,6 @@ var slider = document.getElementById("slider");
 
 function init() {
 	boardSize = document.getElementById("size").value;
-	//speed = document.getElementById("speed").value;
 	scenario = document.getElementById("scenario").value;
 	generation = 1;
 	
