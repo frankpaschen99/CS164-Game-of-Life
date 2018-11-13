@@ -9,7 +9,7 @@ var tileSize;
 var boardSize = 50; // adjustable
 var canvas;
 var ctx;
-var generation = 0;
+var generation = 1;
 var speed = 150;	// adjustable (ms)
 var scenario = 1;	// adjustable - todo: implement some scenarios from wikipedia page
 var interval;
@@ -19,6 +19,7 @@ function init() {
 	boardSize = document.getElementById("size").value;
 	//speed = document.getElementById("speed").value;
 	scenario = document.getElementById("scenario").value;
+	generation = 1;
 	
 	/* Input checking */
 	if (boardSize > 100 || boardSize < 10) {
