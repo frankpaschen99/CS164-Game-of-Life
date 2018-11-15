@@ -5,7 +5,7 @@
    \*||||||||||*/
 
 var board;
-var tileSize;
+var tileSize = 10;
 var boardSize = 50; // adjustable
 var canvas;
 var ctx;
@@ -14,8 +14,13 @@ var speed = 150;	// adjustable (ms)
 var scenario = 1;	// adjustable - todo: implement some scenarios from wikipedia page
 var interval;
 var slider = document.getElementById("slider");
+var running = false;
 
 function init() {
+	// prevent messyness switching from large board to small
+	if (ctx) {
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+	}
 	boardSize = document.getElementById("size").value;
 	scenario = document.getElementById("scenario").value;
 	generation = 1;
@@ -23,6 +28,9 @@ function init() {
 	/* Input checking */
 	if (boardSize > 100 || boardSize < 10) {
 		alert("Boardsize must be between 10 and 100!");
+		return;
+	} else if (boardSize % 5 != 0) {
+		alert("Boardsize must be divisible by 5!");
 		return;
 	}
 	if (speed < 1) {
@@ -64,14 +72,18 @@ function init() {
 	} else if (scenario == 3) {
 		
 	}
+	running = true;
 	// call render first so we can see the first frame
 	render();
 	// call step on an interval specified by the user
 	interval = setInterval(step, speed);
 }
 function updateSpeed() {
-	clearInterval(interval);
-	interval = setInterval(step, 601-slider.value);
+	if (running) {		
+		clearInterval(interval);
+		interval = setInterval(step, 601-slider.value);
+		console.log(601-slider.value);
+	}
 }
 function step() {
 	// backup board to modify before updating the display board
