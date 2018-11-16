@@ -141,12 +141,12 @@ function step() {
 }
 function allowUserDefined() {
 	// Show user instructions + a button to start sim
-	document.getElementById("userDefined").style.visibility='visible';
+	document.getElementById("userDefined").style.display='inline';
 	render();
 }
 function userDefinedStart() {
 	// user told us they are done adding cells, start sim
-	document.getElementById("userDefButton").innerHTML = "";
+	document.getElementById("userDefined").style.display='none';
 	halted = false;
 	updateSpeed();
 }
