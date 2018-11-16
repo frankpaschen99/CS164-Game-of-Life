@@ -78,8 +78,8 @@ function init() {
 	running = true;
 	// call render first so we can see the first frame
 	render();
-	// call step on an interval specified by the user
-	interval = setInterval(step, speed);
+	// set the interval based on users input
+	updateSpeed();
 }
 /* Update interval when slider */
 function updateSpeed() {
