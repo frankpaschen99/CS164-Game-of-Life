@@ -82,8 +82,8 @@ function init() {
 	interval = setInterval(step, speed);
 }
 /* Update interval when slider */
-function updateSpeed(x) {
-	speed = x ? x : 601-document.getElementById("slider").value;
+function updateSpeed() {
+	speed = 601-document.getElementById("slider").value;
 	clearInterval(interval);
 	interval = setInterval(step, speed);
 	document.getElementById("speed").innerHTML = speed + " ms";
