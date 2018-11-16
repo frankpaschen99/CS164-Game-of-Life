@@ -21,8 +21,11 @@ function init() {
 	if (ctx) {
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 	}
+
 	boardSize = document.getElementById("size").value;
 	scenario = document.getElementById("scenario").value;
+	document.getElementById("speed").innerHTML = speed;
+	
 	generation = 1;
 	
 	/* Input checking */
@@ -78,12 +81,12 @@ function init() {
 	// call step on an interval specified by the user
 	interval = setInterval(step, speed);
 }
-function updateSpeed() {
-	if (running) {		
-		clearInterval(interval);
-		interval = setInterval(step, 601-slider.value);
-		console.log(601-slider.value);
-	}
+/* Update interval when slider */
+function updateSpeed(x) {
+	speed = x ? x : 601-document.getElementById("slider").value;
+	clearInterval(interval);
+	interval = setInterval(step, speed);
+	document.getElementById("speed").innerHTML = speed + " ms";
 }
 function step() {
 	// backup board to modify before updating the display board
