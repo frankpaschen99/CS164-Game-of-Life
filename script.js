@@ -75,6 +75,7 @@ function init() {
 		}
 	} else if (scenario == 3) {	// user defined board
 		allowUserDefined();
+		clearInterval(interval);
 		halted = true;
 	}
 	if (!halted) {
@@ -87,10 +88,13 @@ function init() {
 }
 /* Update interval when slider */
 function updateSpeed() {
-	speed = 601-document.getElementById("slider").value;
-	clearInterval(interval);
-	interval = setInterval(step, speed);
-	document.getElementById("speed").innerHTML = speed + " ms";
+	if (!halted) {
+		speed = 601-document.getElementById("slider").value;
+		clearInterval(interval);
+		interval = setInterval(step, speed);
+		document.getElementById("speed").innerHTML = speed + " ms";
+	}
+	
 }
 function step() {
 	// backup board to modify before updating the display board
