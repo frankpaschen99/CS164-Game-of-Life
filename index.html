@@ -4,12 +4,19 @@
 	<h1>Conway's Game of Life</h1>
 	<p>Configure settings to your liking then press "Start". Green cells are "alive", and orange cells are "dead".</p>
 	<div id="gen"></div>
-	<canvas id="canvas" width="600" height="600" ></canvas>
-	
+	<canvas id="canvas" width="600" height="600" onclick="setCellAlive(event)"></canvas>
+	<div id="userDefined" style="visibility: hidden;">
+		<h2>User Defined Input</h2>
+		<p>Click on the canvas above to set individual cells Alive, then press the button below to start.</p>
+		<input id="startButton" type="button" value="Start User-Defined Simulation" onclick="userDefinedStart()" />
+	</div>
+	<div id="userDefButton"></div>
 	<br />
 	
 	<div class="slidecontainer">
 		<p>Adjust speed of simulation:</p>
+		<!-- Speed slider. Start at 451 because we want the starting interval to be 150ms (601-150).
+		Subtracting from 600 so we can have "fast" speeds on the right side of the slider -->
 		<input id="slider" type="range" min="1" max="600" value="451" onchange="updateSpeed()">
 		<p>Speed: </p><div id="speed"></div> 
 	</div>
@@ -19,6 +26,7 @@
 	<select id="scenario">
 		<option value="1">Random</option>
 		<option value="2">10 Cell Line</option>
+		<option value="3">User Defined</option>
 	</select>
 	
 	<br />

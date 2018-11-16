@@ -15,6 +15,7 @@ var scenario = 1;	// adjustable - todo: implement some scenarios from wikipedia 
 var interval;
 var slider = document.getElementById("slider");
 var running = false;
+var halted = false;
 
 function init() {
 	// prevent messyness switching from large board to small
@@ -72,14 +73,17 @@ function init() {
 		for (var row = Math.floor(boardSize/2); row < Math.floor(boardSize/2)+10; row++) {
 			board[row][Math.floor(boardSize/2)] = 1;
 		}
-	} else if (scenario == 3) {
-		
+	} else if (scenario == 3) {	// user defined board
+		allowUserDefined();
+		halted = true;
 	}
-	running = true;
-	// call render first so we can see the first frame
-	render();
-	// set the interval based on users input
-	updateSpeed();
+	if (!halted) {
+		running = true;
+		// call render first so we can see the first frame
+		render();
+		// set the interval based on users input
+		updateSpeed();
+	}
 }
 /* Update interval when slider */
 function updateSpeed() {
@@ -134,6 +138,24 @@ function step() {
 	// increment generation to display to user
 	generation++;
 	document.getElementById("gen").innerHTML = "Generation: " + generation;
+}
+function allowUserDefined() {
+	// Show user instructions + a button to start sim
+	document.getElementById("userDefined").style.visibility='visible';
+	render();
+}
+function userDefinedStart() {
+	// user told us they are done adding cells, start sim
+	document.getElementById("userDefButton").innerHTML = "";
+	halted = false;
+	updateSpeed();
+}
+function setCellAlive(e) {
+	var x = e.offsetX;	// mouse x
+    var y = e.offsetY;	// mouse y
+	// set cell alive at (x,y) in tile coordinates
+	board[Math.floor((x/tileSize))][(Math.floor(y/tileSize))] = 1;
+	render();	// show user their change
 }
 
 function render() {
