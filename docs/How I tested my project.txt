@@ -1,0 +1,5 @@
+I tested my project myself by spending a good amount of time trying to break it.
+I tried all sorts of combinations of inputs, fixing any issues I came across.
+
+Additionally, I had several friends try my project to make sure it was intuitive
+and stable.

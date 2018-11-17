@@ -14,21 +14,20 @@ var speed = 150;	// adjustable (ms)
 var scenario = 1;	// adjustable - todo: implement some scenarios from wikipedia page
 var interval;
 var slider = document.getElementById("slider");
-var running = false;
-var halted = false;
+var running = true;
 
 function init() {
 	// prevent messyness switching from large board to small
 	if (ctx) {
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 	}
-
+	
 	boardSize = document.getElementById("size").value;
 	scenario = document.getElementById("scenario").value;
 	document.getElementById("speed").innerHTML = speed;
 	document.getElementById("canvas").style.display='inline';
 	
-	generation = 1;
+	generation = 1;	// reset generation to 1
 	
 	/* Input checking */
 	if (boardSize > 100 || boardSize < 10) {
@@ -36,10 +35,6 @@ function init() {
 		return;
 	} else if (boardSize % 5 != 0) {
 		alert("Boardsize must be divisible by 5!");
-		return;
-	}
-	if (speed < 1) {
-		alert("Interval Duration must be > 1ms!");
 		return;
 	}
 	
@@ -75,11 +70,11 @@ function init() {
 			board[row][Math.floor(boardSize/2)] = 1;
 		}
 	} else if (scenario == 3) {	// user defined board
-		allowUserDefined();
-		clearInterval(interval);
-		halted = true;
+		allowUserDefined();	// show user defined UI
+		clearInterval(interval);	// stop the board
+		running = false;	// dont let the sim start below
 	}
-	if (!halted) {
+	if (running) {	// nothing above tried to stop the board, continue
 		running = true;
 		// call render first so we can see the first frame
 		render();
@@ -87,9 +82,9 @@ function init() {
 		updateSpeed();
 	}
 }
-/* Update interval when slider */
+/* Update interval when slider changes */
 function updateSpeed() {
-	if (!halted) {
+	if (running) {
 		speed = 601-document.getElementById("slider").value;
 		clearInterval(interval);
 		interval = setInterval(step, speed);
@@ -112,7 +107,7 @@ function step() {
 	for (var col = 1; col < boardSize-1; col++) {
 		for (var row = 1; row < boardSize-1; row++) {
 
-			var liveNeighbors = 0;
+			var liveNeighbors = 0;				// # of live neighboring cells
 			var tileState = board[row][col];	// state of the cell, 0 or 1
 
 			/* Count live neighbors */
@@ -142,6 +137,7 @@ function step() {
 	render();
 	// increment generation to display to user
 	generation++;
+	// update generation in the html
 	document.getElementById("gen").innerHTML = "Generation: " + generation;
 }
 function allowUserDefined() {
@@ -151,9 +147,9 @@ function allowUserDefined() {
 }
 function userDefinedStart() {
 	// user told us they are done adding cells, start sim
-	document.getElementById("userDefined").style.display='none';
-	halted = false;
-	updateSpeed();
+	document.getElementById("userDefined").style.display='none';	// hide user defined UI
+	running = true;	// let the board start
+	updateSpeed();	// start it
 }
 function setCellAlive(e) {
 	var x = e.offsetX;	// mouse x
