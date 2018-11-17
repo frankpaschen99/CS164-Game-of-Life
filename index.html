@@ -4,7 +4,7 @@
 	<h1>Conway's Game of Life</h1>
 	<p>Configure settings to your liking then press "Start". Green cells are "alive", and orange cells are "dead".</p>
 	<div id="gen"></div>
-	<canvas id="canvas" width="600" height="600" onclick="setCellAlive(event)"></canvas>
+	<canvas id="canvas" width="600" height="600" onclick="setCellAlive(event)" style="display: none;"></canvas>
 	<div id="userDefined" style="display: none;">
 		<h2>User Defined Input</h2>
 		<p>Click on the canvas above to set individual cells Alive, then press the button below to start.</p>
@@ -34,16 +34,6 @@
 	<br />
 	
 	<input id="startButton" type="button" value="Start Simulation" onclick="init();" />
-	
-	<br />
-	<br />
-	<br />
-	
-	<h3>Todo List</h3>
-	<ul>
-	<li>Let user specify alive cells before starting</li>
-	<li>User Manual</li>
-	</ul>
 	
 	<center>By <a href="https://github.com/frankpaschen99">Frank Paschen</a></center>
 </body>

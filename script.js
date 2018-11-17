@@ -26,6 +26,7 @@ function init() {
 	boardSize = document.getElementById("size").value;
 	scenario = document.getElementById("scenario").value;
 	document.getElementById("speed").innerHTML = speed;
+	document.getElementById("canvas").style.display='inline';
 	
 	generation = 1;
 	
